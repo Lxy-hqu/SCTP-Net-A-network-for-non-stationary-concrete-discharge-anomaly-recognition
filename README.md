@@ -25,8 +25,40 @@ open_source_version/
     - `MultiStageVideoClassifier`: multi-stage feature extraction + cross-stage modeling + continuous dynamics + classifier head
 - `src/torch_cfc.py`
   - Implementation of the CFC/LTC continuous-time neural network module (imported by `model.py`).
+  - Original reference repository: https://github.com/raminmh/CfC.git
 - `src/smoke_test.py`
   - Minimal import check and forward-pass smoke test (does not require the dataset; runs a forward pass with random tensors).
+
+## Environment & Dependencies
+
+The following versions are from the current development environment used to run `src/model.py` and `src/smoke_test.py`:
+
+- OS: Windows-10-10.0.26100-SP0
+- Python: 3.10.16 (Anaconda, MSC v.1929 64 bit)
+- PyTorch: 2.8.0+cu129 (CUDA runtime 12.9; `torch.cuda.is_available() == True`)
+- torchvision: 0.23.0+cu129
+- NumPy: 2.0.1 (required by `src/torch_cfc.py`)
+
+Minimal required packages to run `src/model.py`:
+
+- torch
+- torchvision
+- numpy
+
+## Citation
+
+If you use the CfC/LTC module (`src/torch_cfc.py`) in academic work, cite the original paper:
+
+```bibtex
+@article{hasani_closed-form_2022,
+    title = {Closed-form continuous-time neural networks},
+    journal = {Nature Machine Intelligence},
+    author = {Hasani, Ramin and Lechner, Mathias and Amini, Alexander and Liebenwein, Lucas and Ray, Aaron and Tschaikowski, Max and Teschl, Gerald and Rus, Daniela},
+    issn = {2522-5839},
+    month = nov,
+    year = {2022},
+}
+```
 
 ## Dataset Layout (`base_training_6`)
 
@@ -75,16 +107,16 @@ Key data-loading assumptions (see `MultiStageConcreteDataset` in the training sc
 
 ## Quick Smoke Test (No Dataset Required)
 
-Run in `open_source_version/src`:
+Run from the repository root:
 
 ```bash
-python smoke_test.py
+python -m src.smoke_test
 ```
 
 Common arguments:
 
 ```bash
-python smoke_test.py --device cpu --num-stages 4 --seq-len 8 --batch-size 4
+python -m src.smoke_test --device cpu --num-stages 4 --seq-len 8 --batch-size 4
 ```
 
 ## Training Paths

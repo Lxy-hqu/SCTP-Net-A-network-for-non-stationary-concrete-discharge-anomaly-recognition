@@ -2,8 +2,12 @@ import argparse
 
 import torch
 
-from config import CONFIG
-from model import MultiStageVideoClassifier
+try:
+    from .config import CONFIG
+    from .model import MultiStageVideoClassifier
+except ImportError:
+    from config import CONFIG
+    from model import MultiStageVideoClassifier
 
 
 def build_model(cfg, num_stages, pretrained):

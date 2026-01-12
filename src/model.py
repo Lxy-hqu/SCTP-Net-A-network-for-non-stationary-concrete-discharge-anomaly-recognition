@@ -5,7 +5,10 @@ import torch.nn as nn
 import torchvision.models as models
 from torch.nn import functional as F
 
-from torch_cfc import Cfc
+try:
+    from .torch_cfc import Cfc
+except ImportError:
+    from torch_cfc import Cfc
 
 
 class ECAModule(nn.Module):
