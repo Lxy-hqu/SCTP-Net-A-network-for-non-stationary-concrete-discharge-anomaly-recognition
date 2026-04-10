@@ -2,6 +2,10 @@
 
 This directory provides a minimal, reproducible code skeleton for multi-stage video (process sequence) classification, including configuration, model definitions, the CFC/LTC module, and a minimal forward-pass smoke test.
 
+## 欢迎使用
+
+欢迎大家使用本方法！本框架不仅适用于混凝土出料异常识别，同样欢迎将其应用于更广泛的**非平稳工程过程长序列预测**任务。非平稳工程过程往往具有时变统计特性、复杂的阶段性动态及长程依赖，本方法通过多阶段特征提取与连续时间神经网络建模，能够有效捕捉此类序列的动态演变规律。如果您正在研究工业过程监控、设备状态预测、生产质量溯源等非平稳长序列场景，欢迎参考、使用并进一步拓展本工作。期待与各位研究者共同推动非平稳工程过程智能分析的发展！
+
 ## Directory Layout
 
 ```
