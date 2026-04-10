@@ -2,6 +2,10 @@
 
 This directory provides a minimal, reproducible code skeleton for multi-stage video (process sequence) classification, including configuration, model definitions, the CFC/LTC module, and a minimal forward-pass smoke test.
 
+## Welcome
+
+You are welcome to use this framework! Beyond concrete discharge anomaly recognition, we warmly encourage applying it to broader **long-sequence prediction tasks for non-stationary engineering processes**. Such processes often exhibit time-varying statistical properties, complex stage-wise dynamics, and long-range dependencies. By combining multi-stage feature extraction with continuous-time neural network modeling, this framework can effectively capture the dynamic evolution of these sequences. If you are working on non-stationary long-sequence scenarios such as industrial process monitoring, equipment condition forecasting, or production quality tracing, feel free to reference, use, and further extend this work. We look forward to collaborating with researchers worldwide to advance intelligent analysis of non-stationary engineering processes!
+
 ## Directory Layout
 
 ```
