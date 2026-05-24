@@ -4,7 +4,15 @@ This directory provides a minimal, reproducible code skeleton for multi-stage vi
 
 ## Welcome
 
-You are welcome to use this framework! Beyond concrete discharge anomaly recognition, we warmly encourage applying it to broader **long-sequence prediction tasks for non-stationary engineering processes**. Such processes often exhibit time-varying statistical properties, complex stage-wise dynamics, and long-range dependencies. By combining multi-stage feature extraction with continuous-time neural network modeling, this framework can effectively capture the dynamic evolution of these sequences. If you are working on non-stationary long-sequence scenarios such as industrial process monitoring, equipment condition forecasting, or production quality tracing, feel free to reference, use, and further extend this work. We look forward to collaborating with researchers worldwide to advance intelligent analysis of non-stationary engineering processes!
+We warmly welcome researchers to transfer the temporal modeling ideas in this work to a wide range of non-stationary time-series modeling scenarios. We also look forward to feedback, suggestions, and application experience from different engineering fields. The core value of SCTP-Net is not limited to concrete discharge anomaly recognition. Instead, it provides a modeling perspective for non-stationary processes: decomposing a long temporal process into stage-aware segments, modeling continuous dynamic evolution within each stage, and propagating and accumulating discriminative evidence across stages.
+
+It should be noted that the stage partitioning in this work is mainly based on engineering experience and process observation, rather than a strict explicit formulation of the underlying physical mechanism. Therefore, when adapting this framework to other applications, researchers are encouraged not to mechanically reuse the stage partitioning strategy or network architecture. Instead, they should start from their own engineering problems and analyze whether the temporal process contains stage-wise behavior, whether key evidence drifts over time, whether local observations are misaligned with global labels, and whether information needs to be transferred across stages. Researchers should also choose an appropriate sequence length according to their process characteristics and computing resources, and perform sensitivity analysis on the number of stages by following the spirit of this work. These considerations can guide a more task-specific model design.
+
+For different application scenarios, the upper-level feature extraction network should be replaced with a network that better matches the data modality and task objective, such as specialized feature extractors for images, sensor signals, point clouds, text logs, or multimodal industrial data. This repository is intended to provide a stage-aware, continuous-time, cross-stage evidence propagation paradigm, rather than a fixed network template that must be copied unchanged.
+
+In industrial settings, many anomalies do not appear suddenly at a single time point. Instead, they often emerge through gradual evolution, stage transition, and evidence accumulation. Therefore, instead of simply aggregating an entire sequence uniformly, it is often more important to study when discriminative evidence appears, how it evolves, and how it can be inherited and strengthened by later stages. This is one of the main reasons why the temporal modeling idea in this work may be transferable to other industrial scenarios.
+
+We are especially interested in seeing researchers further incorporate physical mechanisms, process dynamics, or domain constraints into this modeling framework. For example, future extensions may design stage partitioning, state propagation, and fusion strategies based on real process stages, state-transition rules, conservation relationships, equipment control logic, or interpretable time scales. Such extensions may help the model learn not only statistical correlations from data, but also dynamic regularities of engineering processes, thereby improving stability, interpretability, and cross-scenario generalization. We look forward to hearing your good news in the pull request section.
 
 ## Directory Layout
 
@@ -109,6 +117,10 @@ Key data-loading assumptions (see `MultiStageConcreteDataset` in the training sc
 - Frames inside `process_XXXX/` are named in temporal order (e.g., `0001.jpg`, `0002.jpg`, ...).
 - Frames are sorted by filename to preserve temporal order, then the sequence is split into `num_stages` stages; each stage takes `max_frames // num_stages` frames).
 
+## Data Availability
+
+For access to the original images, please contact xuyang@stu.hqu.edu.cn.
+
 ## Quick Smoke Test (No Dataset Required)
 
 Run from the repository root:
@@ -129,3 +141,19 @@ Default dataset paths in `src/config.py` are relative (e.g., `./base_training_6/
 
 - Your current working directory contains `base_training_6/`, or
 - You update `CONFIG["data"]["train_dir"] / val_dir / test_dir` to absolute paths.
+
+## Citation
+
+If you use SCTP-Net in academic work, please cite:
+
+```bibtex
+@article{zhou_sctp-net_2026,
+    title = {SCTP-Net: a multi-stage continuous-time propagation network for non-stationary concrete discharge anomaly recognition},
+    author = {Zhou, Xuejin and Li, Xuyang and Yang, Jianhong and Fang, Huaiying and Tu, Ran and Zeng, Yi and Zhong, Jinjin},
+    journal = {Advanced Engineering Informatics},
+    volume = {75},
+    pages = {104843},
+    year = {2026},
+    doi = {10.1016/j.aei.2026.104843},
+}
+```
